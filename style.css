@@ -320,14 +320,7 @@ section {
     line-height: 1.6;
 }
 
-.service-price {
-    background: var(--gradient);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 20px;
-    display: inline-block;
-    font-weight: 600;
-}
+
 
 /* 作品展示 */
 .portfolio {
