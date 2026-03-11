@@ -1,6 +1,7 @@
 // 移动端菜单切换
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
+const navLinks = document.querySelectorAll('.nav-menu a');
 
 hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
@@ -20,7 +21,7 @@ hamburger.addEventListener('keydown', (e) => {
 });
 
 // 点击导航链接后关闭菜单
-document.querySelectorAll('.nav-menu a').forEach(link => {
+navLinks.forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
@@ -134,7 +135,6 @@ function handleSubmit(event) {
 
 // 导航栏滚动效果
 let lastScroll = 0;
-const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
@@ -158,6 +158,10 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
+// 缓存导航栏元素
+const navbar = document.querySelector('.navbar');
+const navbarHeight = navbar ? navbar.offsetHeight : 70;
+
 // 平滑滚动到锚点
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -165,9 +169,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(this.getAttribute('href'));
         
         if (target) {
-            const navbar = document.querySelector('.navbar');
-            const navbarHeight = navbar ? navbar.offsetHeight : 70;
-            
             // 滚动到目标元素位置减去导航栏高度，确保内容紧贴导航栏下方
             const offsetTop = target.offsetTop - navbarHeight;
             window.scrollTo({

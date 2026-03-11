@@ -344,13 +344,7 @@ section {
     gap: 30px;
 }
 
-.card {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    will-change: transform;
-}
+
 
 .service-card {
     background: white;
@@ -682,9 +676,10 @@ section {
         background: white;
         width: 100%;
         text-align: center;
-        transition: 0.3s;
+        transition: 0.3s ease;
         box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
         padding: 20px 0;
+        z-index: 999;
     }
 
     .nav-menu.active {
@@ -722,6 +717,23 @@ section {
 
     section {
         padding: 60px 0;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .contact-icon {
+        margin-bottom: 10px;
     }
 }
 
