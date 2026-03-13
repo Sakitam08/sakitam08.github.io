@@ -1,0 +1,58 @@
+/* pages/services/services.wxss */
+.services {
+  padding: 160rpx 0;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400rpx, 1fr));
+  gap: 60rpx;
+}
+
+.service-card {
+  background: white;
+  border-radius: 30rpx;
+  box-shadow: 0 10rpx 40rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  padding: 80rpx 60rpx;
+  text-align: center;
+}
+
+.service-card:hover {
+  transform: translateY(-20rpx);
+  box-shadow: 0 30rpx 80rpx rgba(0, 0, 0, 0.2);
+}
+
+.service-icon {
+  font-size: 120rpx;
+  margin-bottom: 40rpx;
+}
+
+.service-title {
+  font-size: 48rpx;
+  margin-bottom: 30rpx;
+  color: #667eea;
+  display: block;
+}
+
+.service-desc {
+  color: #666;
+  margin-bottom: 40rpx;
+  line-height: 1.6;
+  display: block;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-card {
+    padding: 60rpx 40rpx;
+  }
+  
+  .service-title {
+    font-size: 40rpx;
+  }
+}

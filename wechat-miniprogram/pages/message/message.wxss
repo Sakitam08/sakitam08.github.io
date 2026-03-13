@@ -1,0 +1,84 @@
+/* pages/message/message.wxss */
+.message {
+  padding: 160rpx 0;
+  background: #f8f9fa;
+}
+
+.message-form {
+  max-width: 800rpx;
+  margin: 0 auto;
+  background: white;
+  padding: 80rpx;
+  border-radius: 30rpx;
+  box-shadow: 0 10rpx 40rpx rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 50rpx;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 16rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+input,
+textarea,
+.picker {
+  width: 100%;
+  padding: 24rpx 30rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-family: inherit;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.picker {
+  background: white;
+  cursor: pointer;
+}
+
+.btn-submit {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+  transform: translateY(-6rpx);
+  box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.2);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .message-form {
+    padding: 40rpx;
+  }
+  
+  input,
+  textarea,
+  .picker {
+    padding: 20rpx 24rpx;
+    font-size: 28rpx;
+  }
+  
+  .btn-submit {
+    padding: 24rpx;
+    font-size: 32rpx;
+  }
+}

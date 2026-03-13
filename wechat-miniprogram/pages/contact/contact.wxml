@@ -1,0 +1,70 @@
+<!--pages/contact/contact.wxml-->
+<view class="contact">
+  <view class="container">
+    <text class="section-title">联系方式</text>
+    <view class="contact-content">
+      <view class="contact-info">
+        <view class="contact-item">
+          <view class="contact-icon">💬</view>
+          <view class="contact-details">
+            <text class="contact-title">微信</text>
+            <text class="contact-value">xing-yun-1997</text>
+            <button class="btn-copy" bindtap="copyText" data-text="xing-yun-1997">复制微信号</button>
+          </view>
+        </view>
+        <view class="contact-item">
+          <view class="contact-icon">🐧</view>
+          <view class="contact-details">
+            <text class="contact-title">QQ</text>
+            <text class="contact-value">1985297393</text>
+            <button class="btn-copy" bindtap="copyText" data-text="1985297393">复制QQ号</button>
+          </view>
+        </view>
+        <view class="contact-item">
+          <view class="contact-icon">🐟</view>
+          <view class="contact-details">
+            <text class="contact-title">闲鱼</text>
+            <navigator url="https://2.taobao.com/profile/index.htm?userId=Sakitam08" target="_blank" class="contact-link">Sakitam08</navigator>
+            <button class="btn-copy" bindtap="copyText" data-text="Sakitam08">复制闲鱼号</button>
+          </view>
+        </view>
+        <view class="contact-item">
+          <view class="contact-icon">📱</view>
+          <view class="contact-details">
+            <text class="contact-title">公众号</text>
+            <text class="contact-value">Sakitam08</text>
+            <view class="qrcode">
+              <image src="/images/1.jpg" mode="aspectFit" style="width: 240rpx; height: 240rpx;"></image>
+            </view>
+          </view>
+        </view>
+        <view class="contact-item">
+          <view class="contact-icon">🌐</view>
+          <view class="contact-details">
+            <text class="contact-title">Gitee</text>
+            <navigator url="https://gitee.com/Sakitam08" target="_blank" class="contact-link">https://gitee.com/Sakitam08</navigator>
+            <button class="btn-copy" bindtap="copyText" data-text="https://gitee.com/Sakitam08">复制链接</button>
+          </view>
+        </view>
+        <view class="contact-item">
+          <view class="contact-icon">💻</view>
+          <view class="contact-details">
+            <text class="contact-title">GitHub</text>
+            <navigator url="https://github.com/Sakitam08" target="_blank" class="contact-link">https://github.com/Sakitam08</navigator>
+            <button class="btn-copy" bindtap="copyText" data-text="https://github.com/Sakitam08">复制链接</button>
+          </view>
+        </view>
+      </view>
+      <view class="contact-tips">
+        <text class="contact-tips-title">💡 接单说明</text>
+        <view class="contact-tips-list">
+          <text class="contact-tips-item">可通过闲鱼、GitHub等平台联系我</text>
+          <text class="contact-tips-item">支持微信、QQ在线沟通</text>
+          <text class="contact-tips-item">项目需求可详细描述，我会尽快回复</text>
+          <text class="contact-tips-item">价格根据项目复杂度面议</text>
+          <text class="contact-tips-item">支持远程演示和沟通</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

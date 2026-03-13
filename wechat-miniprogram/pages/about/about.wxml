@@ -1,0 +1,27 @@
+<!--pages/about/about.wxml-->
+<view class="about">
+  <view class="container">
+    <text class="section-title">关于我</text>
+    <view class="about-content">
+      <view class="about-image">
+        <view class="avatar-placeholder">
+          <svg viewBox="0 0 100 100" width="300rpx" height="300rpx">
+            <circle cx="50" cy="50" r="45" fill="#667eea"/>
+            <text x="50" y="55" text-anchor="middle" fill="white" font-size="60">👨‍💻</text>
+          </svg>
+        </view>
+      </view>
+      <view class="about-text">
+        <text class="about-title">热爱电脑技术的实践者</text>
+        <text class="about-desc">专注于为客户提供实用、可靠的技术解决方案。熟悉电脑维修、系统重装、远程协助，能完成3D建模、网站开发及小程序制作的基础落地服务。</text>
+        <text class="about-desc">我注重细节，认真对待每一个项目，坚持"能做才接、做就做好"，选择我，就是选择踏实和放心。</text>
+        <view class="skills">
+          <view class="skill-tag">3D建模</view>
+          <view class="skill-tag">Web开发</view>
+          <view class="skill-tag">小程序</view>
+          <view class="skill-tag">技术支持</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

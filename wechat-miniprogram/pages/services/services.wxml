@@ -1,0 +1,28 @@
+<!--pages/services/services.wxml-->
+<view class="services">
+  <view class="container">
+    <text class="section-title">服务项目</text>
+    <view class="services-grid">
+      <view class="service-card">
+        <view class="service-icon">🎨</view>
+        <text class="service-title">3D建模</text>
+        <text class="service-desc">专业的3D建模服务，包括产品建模、场景建模、角色建模等。使用Blender、Maya等专业工具，为您打造精美的3D作品。</text>
+      </view>
+      <view class="service-card">
+        <view class="service-icon">💻</view>
+        <text class="service-title">网站搭建</text>
+        <text class="service-desc">从企业官网到电商平台，从个人博客到管理系统，提供全方位的网站开发服务。响应式设计，完美适配各种设备。</text>
+      </view>
+      <view class="service-card">
+        <view class="service-icon">📱</view>
+        <text class="service-title">小程序开发</text>
+        <text class="service-desc">微信小程序、支付宝小程序开发，提供从设计到上线的一站式服务。功能完善，用户体验优秀。</text>
+      </view>
+      <view class="service-card">
+        <view class="service-icon">🔧</view>
+        <text class="service-title">远程技术协助</text>
+        <text class="service-desc">提供远程技术支持服务，解决您在使用电脑、软件、网络等方面遇到的问题。快速响应，高效解决。</text>
+      </view>
+    </view>
+  </view>
+</view>

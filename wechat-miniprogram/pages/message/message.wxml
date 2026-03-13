@@ -1,0 +1,35 @@
+<!--pages/message/message.wxml-->
+<view class="message">
+  <view class="container">
+    <text class="section-title">在线留言</text>
+    <view class="message-form">
+      <form bindsubmit="handleSubmit">
+        <view class="form-group">
+          <text class="form-label">您的姓名</text>
+          <input type="text" name="name" placeholder="请输入您的姓名" required />
+        </view>
+        <view class="form-group">
+          <text class="form-label">联系邮箱</text>
+          <input type="email" name="email" placeholder="请输入您的邮箱" required />
+        </view>
+        <view class="form-group">
+          <text class="form-label">联系电话</text>
+          <input type="tel" name="phone" placeholder="请输入您的联系电话" />
+        </view>
+        <view class="form-group">
+          <text class="form-label">需要的服务</text>
+          <picker mode="selector" name="service" range="{{services}}" range-key="name" value="{{serviceIndex}}" bindchange="bindServiceChange">
+            <view class="picker">
+              {{services[serviceIndex].name}}
+            </view>
+          </picker>
+        </view>
+        <view class="form-group">
+          <text class="form-label">需求描述</text>
+          <textarea name="message" placeholder="请详细描述您的需求..." rows="5" required></textarea>
+        </view>
+        <button form-type="submit" class="btn-submit" loading="{{loading}}">{{loading ? '提交中' : '提交留言'}}</button>
+      </form>
+    </view>
+  </view>
+</view>

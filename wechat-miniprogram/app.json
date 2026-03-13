@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/about/about",
+    "pages/services/services",
+    "pages/portfolio/portfolio",
+    "pages/contact/contact",
+    "pages/message/message"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#667eea",
+    "navigationBarTitleText": "技术服务",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#667eea",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/services/services",
+        "text": "服务"
+      },
+      {
+        "pagePath": "pages/portfolio/portfolio",
+        "text": "案例"
+      },
+      {
+        "pagePath": "pages/contact/contact",
+        "text": "联系"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

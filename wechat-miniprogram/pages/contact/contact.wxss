@@ -1,0 +1,131 @@
+/* pages/contact/contact.wxss */
+.contact {
+  padding: 160rpx 0;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: 100rpx;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 60rpx;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 40rpx;
+  background: #f8f9fa;
+  padding: 60rpx;
+  border-radius: 30rpx;
+}
+
+.contact-icon {
+  font-size: 100rpx;
+}
+
+.contact-details {
+  flex: 1;
+}
+
+.contact-title {
+  font-size: 40rpx;
+  margin-bottom: 20rpx;
+  color: #667eea;
+  display: block;
+}
+
+.contact-value {
+  color: #666;
+  margin-bottom: 30rpx;
+  display: block;
+}
+
+.contact-link {
+  color: #667eea;
+  text-decoration: none;
+  margin-bottom: 30rpx;
+  display: block;
+  word-break: break-all;
+}
+
+.btn-copy {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 16rpx 40rpx;
+  border-radius: 40rpx;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-copy:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.2);
+}
+
+.qrcode {
+  margin-top: 20rpx;
+  text-align: center;
+}
+
+.contact-tips {
+  background: #f8f9fa;
+  padding: 60rpx;
+  border-radius: 30rpx;
+}
+
+.contact-tips-title {
+  font-size: 40rpx;
+  margin-bottom: 40rpx;
+  color: #667eea;
+  display: block;
+}
+
+.contact-tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.contact-tips-item {
+  color: #666;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #e0e0e0;
+  display: block;
+}
+
+.contact-tips-item:last-child {
+  border-bottom: none;
+}
+
+/* 响应式设计 */
+@media (min-width: 768px) {
+  .contact-content {
+    flex-direction: row;
+  }
+  
+  .contact-info {
+    flex: 2;
+  }
+  
+  .contact-tips {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .contact-icon {
+    margin-bottom: 20rpx;
+  }
+}

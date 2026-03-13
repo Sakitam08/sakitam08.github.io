@@ -1,0 +1,14 @@
+<!--pages/index/index.wxml-->
+<view class="hero">
+  <view class="container">
+    <view class="hero-content">
+      <text class="hero-title">专业技术服务
+为您创造价值</text>
+      <text class="hero-subtitle">3D建模 · 网站搭建 · 小程序开发 · 远程技术协助</text>
+      <view class="hero-buttons">
+        <navigator url="/pages/contact/contact" class="btn btn-primary">立即联系</navigator>
+        <navigator url="/pages/services/services" class="btn btn-secondary">了解服务</navigator>
+      </view>
+    </view>
+  </view>
+</view>
