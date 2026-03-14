@@ -8,6 +8,24 @@
     <meta http-equiv="Expires" content="0">
     <title>技术服务平台</title>
     <link rel="stylesheet" href="style.css?v=20260311">
+    <style>
+        /* 新增：腾讯文档表单适配样式 */
+        .tencent-form-container {
+            width: 100%;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            box-sizing: border-box;
+        }
+        /* 响应式适配手机端 */
+        @media (max-width: 768px) {
+            .tencent-form-container iframe {
+                height: 1000px !important;
+                min-height: 1000px !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- 悬浮联系按钮 -->
@@ -288,7 +306,8 @@
                             <h3>QQ</h3>
                             <p>1985297393</p>
                             <button class="btn-copy" onclick="copyText('1985297393')">复制QQ号</button>
-                            <a href="https://qm.qq.com/cgi-bin/qm/qr?k=YOUR_QQ_KEY&noverify=0" target="_blank" class="btn-link">一键加好友</a>
+                            <!-- 替换为你的真实QQ加好友链接（教程：QQ→个人资料→加好友设置→生成链接） -->
+                            <a href="https://qm.qq.com/cgi-bin/qm/qr?k=你的QQ加好友key&noverify=0" target="_blank" class="btn-link">一键加好友</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -301,38 +320,18 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- 替换为腾讯文档表单（核心修改） -->
                 <div class="contact-form">
                     <h3>需求提交</h3>
-                    <form id="contactForm" onsubmit="handleSubmit(event)">
-                        <div class="form-group">
-                            <label for="name">您的姓名</label>
-                            <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">联系邮箱</label>
-                            <input type="email" id="email" name="email" required placeholder="请输入您的邮箱">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">联系电话</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="请输入您的联系电话">
-                        </div>
-                        <div class="form-group">
-                            <label for="service">需求类型</label>
-                            <select id="service" name="service" required>
-                                <option value="">请选择服务类型</option>
-                                <option value="3dmodeling">3D建模</option>
-                                <option value="website">网站搭建</option>
-                                <option value="miniprogram">小程序开发</option>
-                                <option value="techsupport">电脑维护</option>
-                                <option value="other">其他</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">项目描述</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="请详细描述您的需求..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-submit">提交需求</button>
-                    </form>
+                    <div class="tencent-form-container">
+                        <iframe src="https://docs.qq.com/form/page/DWkJVY3pmeEpuV3hH" 
+                                width="100%" 
+                                height="800" 
+                                frameborder="0" 
+                                allowfullscreen="true" 
+                                style="border:none;min-height:800px;"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -426,25 +425,48 @@
         </div>
     </div>
 
+    <!-- 补充复制功能脚本 -->
+    <script>
+        // 复制文本功能
+        function copyText(text) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('复制成功！');
+                }).catch(err => {
+                    alert('复制失败，请手动复制：' + text);
+                });
+            } else {
+                // 兼容旧浏览器
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('复制成功！');
+            }
+        }
+    </script>
+
     <script src="script.js?v=20260311"></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBz_ztSGPZyNwgQ0ZllcFWLqrdl1Rwxxmc",
+        authDomain: "sakitam08-vip.firebaseapp.com",
+        projectId: "sakitam08-vip",
+        storageBucket: "sakitam08-vip.firebasestorage.app",
+        messagingSenderId: "98861530404",
+        appId: "1:98861530404:web:f657f3c4bb514e965547b1"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    </script>
 </body>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBz_ztSGPZyNwgQ0ZllcFWLqrdl1Rwxxmc",
-    authDomain: "sakitam08-vip.firebaseapp.com",
-    projectId: "sakitam08-vip",
-    storageBucket: "sakitam08-vip.firebasestorage.app",
-    messagingSenderId: "98861530404",
-    appId: "1:98861530404:web:f657f3c4bb514e965547b1"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
 </html>
