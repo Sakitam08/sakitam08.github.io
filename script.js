@@ -114,7 +114,7 @@ function handleSubmit(event) {
     });
     
     // 发送数据到自动接单系统后端API
-    fetch('http://127.0.0.1:3001/api/orders', {
+    fetch('https://backend-pi-amber-57.vercel.app/api/orders', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -351,7 +351,7 @@ function handleOrderSubmit(event) {
     });
     
     // 发送数据到自动接单系统后端API
-    fetch('http://127.0.0.1:3001/api/orders', {
+    fetch('https://backend-pi-amber-57.vercel.app/api/orders', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
