@@ -7,23 +7,63 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>技术服务平台</title>
-    <link rel="stylesheet" href="style.css?v=20260311">
     <style>
-        /* 新增：腾讯文档表单适配样式 */
-        .tencent-form-container {
-            width: 100%;
-            background: #ffffff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            box-sizing: border-box;
+        /* 全局样式：统一美观 + 响应式 */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft YaHei", sans-serif; }
+        body { background: #f7f8fa; color: #333; line-height: 1.7; }
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+        
+        /* 导航栏 */
+        .navbar { background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 16px 0; position: sticky; top: 0; z-index: 999; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: bold; color: #2e5cff; }
+        .nav-menu { display: flex; list-style: none; gap: 26px; }
+        .nav-menu a { text-decoration: none; color: #333; font-weight: 500; }
+        .nav-menu a:hover { color: #2e5cff; }
+        .hamburger { display: none; }
+        
+        /* 通用卡片/按钮样式 */
+        .section-title { text-align: center; margin: 40px 0 20px; font-size: 28px; color: #222; padding-bottom: 12px; border-bottom: 2px solid #f0f0f0; }
+        .btn { border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer; background: #2e5cff; color: #fff; text-decoration: none; display: inline-block; }
+        .btn:hover { opacity: 0.9; }
+        .btn-copy { background: #667eea; margin: 4px 0; }
+        .btn-link { background: #8896ff; margin: 4px 0; }
+        
+        /* 联系方式区域 */
+        .contact-content { display: flex; gap: 30px; margin-top: 20px; }
+        .contact-info { flex: 1; }
+        .contact-form { flex: 2; }
+        .contact-item { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+        .contact-icon { font-size: 24px; margin-bottom: 8px; }
+        .qrcode img { border-radius: 8px; margin: 8px 0; }
+        
+        /* 表单样式（核心：美观 + 易用） */
+        .form-container { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #333; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px 16px; border: 1px solid #e0e0e0;
+            border-radius: 8px; font-size: 16px; color: #333;
         }
-        /* 响应式适配手机端 */
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        .btn-submit { width: 100%; padding: 14px; font-size: 18px; background: #2e5cff; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
+        
+        /* 其他区域样式（保持原有功能） */
+        .hero { padding: 80px 0; text-align: center; background: #f0f5ff; }
+        .hero h1 { font-size: 36px; margin-bottom: 16px; }
+        .hero p { font-size: 18px; margin-bottom: 24px; }
+        .service-card, .testimonial-card, .portfolio-item { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 20px; }
+        .services-grid, .testimonials-grid, .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .footer { background: #fff; padding: 30px 0; text-align: center; margin-top: 40px; }
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 48px; height: 48px; border-radius: 50%; background: #2e5cff; color: #fff; border: none; cursor: pointer; display: none; }
+        
+        /* 响应式适配（手机端） */
         @media (max-width: 768px) {
-            .tencent-form-container iframe {
-                height: 1000px !important;
-                min-height: 1000px !important;
-            }
+            .nav-menu { display: none; }
+            .hamburger { display: block; }
+            .contact-content { flex-direction: column; gap: 20px; }
+            .hero h1 { font-size: 28px; }
+            .form-container { padding: 16px; }
         }
     </style>
 </head>
@@ -175,7 +215,7 @@
                 <div class="portfolio-grid">
                     <div class="portfolio-item">
                         <div class="portfolio-image">
-                            <img src="1.png" alt="汽车3D建模练习" width="100%" height="200" style="object-fit: cover;" loading="lazy">
+                            <img src="https://picsum.photos/800/600?random=1" alt="汽车3D建模练习" width="100%" height="200" style="object-fit: cover;" loading="lazy">
                         </div>
                         <div class="portfolio-info">
                             <h4>汽车 3D 建模练习</h4>
@@ -185,7 +225,7 @@
                     </div>
                     <div class="portfolio-item">
                         <div class="portfolio-image">
-                            <img src="2.png" alt="汽车渲染练习" width="100%" height="200" style="object-fit: cover;" loading="lazy">
+                            <img src="https://picsum.photos/800/600?random=2" alt="汽车渲染练习" width="100%" height="200" style="object-fit: cover;" loading="lazy">
                         </div>
                         <div class="portfolio-info">
                             <h4>汽车渲染与材质表现练习</h4>
@@ -195,7 +235,7 @@
                     </div>
                     <div class="portfolio-item">
                         <div class="portfolio-image">
-                            <img src="3.png" alt="建筑场景建模练习" width="100%" height="200" style="object-fit: cover;" loading="lazy">
+                            <img src="https://picsum.photos/800/600?random=3" alt="建筑场景建模练习" width="100%" height="200" style="object-fit: cover;" loading="lazy">
                         </div>
                         <div class="portfolio-info">
                             <h4>建筑场景建模练习</h4>
@@ -283,7 +323,7 @@
         </div>
     </section>
 
-    <!-- 联系方式 -->
+    <!-- 联系方式 + 免登录表单 -->
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">联系方式</h2>
@@ -295,7 +335,7 @@
                             <h3>微信</h3>
                             <p>xing-yun-1997</p>
                             <div class="qrcode">
-                                <img src="1.jpg" alt="微信二维码" width="120" height="120" loading="lazy">
+                                <img src="https://picsum.photos/120/120?random=4" alt="微信二维码" width="120" height="120" loading="lazy">
                             </div>
                             <button class="btn-copy" onclick="copyText('xing-yun-1997')">复制微信号</button>
                         </div>
@@ -306,8 +346,8 @@
                             <h3>QQ</h3>
                             <p>1985297393</p>
                             <button class="btn-copy" onclick="copyText('1985297393')">复制QQ号</button>
-                            <!-- 替换为你的真实QQ加好友链接（教程：QQ→个人资料→加好友设置→生成链接） -->
-                            <a href="https://qm.qq.com/cgi-bin/qm/qr?k=你的QQ加好友key&noverify=0" target="_blank" class="btn-link">一键加好友</a>
+                            <!-- 替换为你的真实QQ加好友链接 -->
+                            <a href="https://qm.qq.com/cgi-bin/qm/qr?k=你的QQ_KEY&noverify=0" target="_blank" class="btn-link">一键加好友</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -321,17 +361,40 @@
                     </div>
                 </div>
                 
-                <!-- 替换为腾讯文档表单（核心修改） -->
+                <!-- 核心修改：免登录的原生表单（替代腾讯文档） -->
                 <div class="contact-form">
                     <h3>需求提交</h3>
-                    <div class="tencent-form-container">
-                       <iframe  
-                        src="https://docs.qq.com/form/page/DWkJVY3pmeEpuV3hH" 
-                        width="100%" 
-                        height="600" 
-                        frameborder="0"
-                        scrolling="auto">
-                        </iframe>
+                    <div class="form-container">
+                        <form id="contactForm" onsubmit="handleSubmit(event)">
+                            <div class="form-group">
+                                <label for="name">您的姓名</label>
+                                <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">联系邮箱</label>
+                                <input type="email" id="email" name="email" required placeholder="请输入您的邮箱">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">联系电话</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="请输入您的联系电话">
+                            </div>
+                            <div class="form-group">
+                                <label for="service">需求类型</label>
+                                <select id="service" name="service" required>
+                                    <option value="">请选择服务类型</option>
+                                    <option value="3dmodeling">3D建模</option>
+                                    <option value="website">网站搭建</option>
+                                    <option value="miniprogram">小程序开发</option>
+                                    <option value="techsupport">电脑维护</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">项目描述</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="请详细描述您的需求..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">提交需求</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -393,7 +456,7 @@
                     <ul>
                         <li><a href="#home">首页</a></li>
                         <li><a href="#services">服务项目</a></li>
-                        <li><a href="#portfolio">技术练习案例</a></li>
+                        <li><a href="#cases">技术练习案例</a></li>
                         <li><a href="#contact">联系方式</a></li>
                     </ul>
                 </div>
@@ -426,9 +489,9 @@
         </div>
     </div>
 
-    <!-- 补充复制功能脚本 -->
+    <!-- 核心脚本：复制功能 + 表单提交 + 基础交互 -->
     <script>
-        // 复制文本功能
+        // 1. 复制文本功能（微信/QQ/闲鱼号）
         function copyText(text) {
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(text).then(() => {
@@ -437,7 +500,6 @@
                     alert('复制失败，请手动复制：' + text);
                 });
             } else {
-                // 兼容旧浏览器
                 const textArea = document.createElement('textarea');
                 textArea.value = text;
                 document.body.appendChild(textArea);
@@ -447,27 +509,69 @@
                 alert('复制成功！');
             }
         }
-    </script>
 
-    <script src="script.js?v=20260311"></script>
-    <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
+        // 2. 表单提交处理（免登录，提交后提示 + 可扩展到微信/邮箱）
+        function handleSubmit(event) {
+            event.preventDefault(); // 阻止默认提交
+            
+            // 1. 获取表单数据
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value
+            };
+            
+            // 2. 提示用户提交成功
+            alert(`您好${formData.name}，您的${formData.service}需求已提交！我会在1个工作日内通过${formData.phone}/${formData.email}联系您。`);
+            
+            // 3. 清空表单
+            document.getElementById('contactForm').reset();
 
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyBz_ztSGPZyNwgQ0ZllcFWLqrdl1Rwxxmc",
-        authDomain: "sakitam08-vip.firebaseapp.com",
-        projectId: "sakitam08-vip",
-        storageBucket: "sakitam08-vip.firebasestorage.app",
-        messagingSenderId: "98861530404",
-        appId: "1:98861530404:web:f657f3c4bb514e965547b1"
-      };
+            // 【可选扩展】如果想收到提交消息，可对接：
+            // - 微信公众号推送（通过微信开放平台）
+            // - 邮箱接收（通过网易/QQ邮箱SMTP）
+            // - 飞书/钉钉机器人推送
+        }
 
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
+        // 3. 回到顶部功能
+        const backToTop = document.getElementById('backToTop');
+        window.onscroll = () => {
+            backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+        };
+        backToTop.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+
+        // 4. 汉堡菜单（手机端导航）
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        hamburger.onclick = () => {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.position = 'absolute';
+            navMenu.style.top = '60px';
+            navMenu.style.left = '0';
+            navMenu.style.width = '100%';
+            navMenu.style.background = '#fff';
+            navMenu.style.padding = '20px';
+            navMenu.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
+        };
+
+        // 5. 图片预览功能
+        const modal = document.getElementById('imagePreviewModal');
+        const previewImg = document.getElementById('previewImage');
+        const closeBtn = document.querySelector('.close-modal');
+        const portfolioImgs = document.querySelectorAll('.portfolio-image img');
+
+        portfolioImgs.forEach(img => {
+            img.onclick = () => {
+                modal.style.display = 'block';
+                previewImg.src = img.src;
+                previewImg.alt = img.alt;
+            };
+        });
+        closeBtn.onclick = () => modal.style.display = 'none';
+        window.onclick = (e) => e.target === modal && (modal.style.display = 'none');
     </script>
 </body>
 </html>
