@@ -3,575 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>技术服务平台</title>
+    <title>对话+图标分离布局（右下角固定）</title>
     <style>
-        /* 全局样式：统一美观 + 响应式 */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft YaHei", sans-serif; }
-        body { background: #f7f8fa; color: #333; line-height: 1.7; }
-        .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
-        
-        /* 导航栏 */
-        .navbar { background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 16px 0; position: sticky; top: 0; z-index: 999; }
-        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 22px; font-weight: bold; color: #2e5cff; }
-        .nav-menu { display: flex; list-style: none; gap: 26px; }
-        .nav-menu a { text-decoration: none; color: #333; font-weight: 500; }
-        .nav-menu a:hover { color: #2e5cff; }
-        .hamburger { display: none; }
-        
-        /* 通用卡片/按钮样式 */
-        .section-title { text-align: center; margin: 40px 0 20px; font-size: 28px; color: #222; padding-bottom: 12px; border-bottom: 2px solid #f0f0f0; }
-        .btn { border: none; border-radius: 8px; padding: 10px 20px; cursor: pointer; background: #2e5cff; color: #fff; text-decoration: none; display: inline-block; }
-        .btn:hover { opacity: 0.9; }
-        .btn-copy { background: #667eea; margin: 4px 0; }
-        .btn-link { background: #8896ff; margin: 4px 0; }
-        
-        /* 联系方式区域 */
-        .contact-content { display: flex; gap: 30px; margin-top: 20px; }
-        .contact-info { flex: 1; }
-        .contact-form { flex: 2; }
-        .contact-item { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
-        .contact-icon { font-size: 24px; margin-bottom: 8px; }
-        .qrcode img { border-radius: 8px; margin: 8px 0; }
-        
-        /* 表单样式（核心：美观 + 易用） */
-        .form-container { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #333; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 12px 16px; border: 1px solid #e0e0e0;
-            border-radius: 8px; font-size: 16px; color: #333;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
         }
-        .form-group textarea { min-height: 150px; resize: vertical; }
-        .btn-submit { width: 100%; padding: 14px; font-size: 18px; background: #2e5cff; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
-        
-        /* 其他区域样式（保持原有功能） */
-        .hero { padding: 80px 0; text-align: center; background: #f0f5ff; }
-        .hero h1 { font-size: 36px; margin-bottom: 16px; }
-        .hero p { font-size: 18px; margin-bottom: 24px; }
-        .service-card, .testimonial-card, .portfolio-item { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 20px; }
-        .services-grid, .testimonials-grid, .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .footer { background: #fff; padding: 30px 0; text-align: center; margin-top: 40px; }
-        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 48px; height: 48px; border-radius: 50%; background: #2e5cff; color: #fff; border: none; cursor: pointer; display: none; }
-        
-        /* 响应式适配（手机端） */
+        body {
+            background: #f5f5f5;
+            height: 200vh; /* 方便测试滚动 */
+            padding-bottom: 100px;
+        }
+
+        /* 核心容器：对话区（左） + 图标区（右下固定） */
+        .chat-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        /* 对话展示区 - 左侧 */
+        .chat-content {
+            width: 75%;
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            min-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        /* 单字/单词向上滚动的对话气泡 */
+        .chat-bubble {
+            background: #e8f4ff;
+            color: #333;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            max-width: 80%;
+            animation: wordUp 0.5s ease forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        /* 单字/单词逐个显示的文本容器 */
+        .word-scroll {
+            line-height: 1.6;
+        }
+
+        /* 右下角固定图标区 - 分离独立 */
+        .icon-fixed {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 60px;
+            height: 60px;
+            background: #2e5cff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(46, 92, 255, 0.4);
+            cursor: pointer;
+            z-index: 999;
+        }
+        .icon-fixed svg {
+            width: 30px;
+            height: 30px;
+            fill: #fff;
+        }
+
+        /* 单字向上滚动动画 */
+        @keyframes wordUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式适配 */
         @media (max-width: 768px) {
-            .nav-menu { display: none; }
-            .hamburger { display: block; }
-            .contact-content { flex-direction: column; gap: 20px; }
-            .hero h1 { font-size: 28px; }
-            .form-container { padding: 16px; }
+            .chat-content {
+                width: 100%;
+            }
+            .icon-fixed {
+                width: 50px;
+                height: 50px;
+                right: 20px;
+                bottom: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 悬浮联系按钮 -->
-    <div class="floating-contact">
-        <a href="#contact" class="floating-btn" title="联系我们">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-            </svg>
-        </a>
-    </div>
-
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">技术服务</div>
-            <ul class="nav-menu">
-                <li><a href="#home">首页</a></li>
-                <li><a href="#services">服务介绍</a></li>
-                <li><a href="#cases">案例展示</a></li>
-                <li><a href="#testimonials">客户评价</a></li>
-                <li><a href="#contact">联系方式</a></li>
-                <li><a href="#order">接单说明</a></li>
-            </ul>
-            <div class="hamburger" role="button" aria-expanded="false" aria-label="Toggle menu" tabindex="0">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- 首页 -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>专业技术服务<br>为您创造价值</h1>
-                <p>3D建模 · 网站搭建 · 小程序开发 · 电脑维护</p>
-                <a href="#contact" class="btn btn-primary">立即联系</a>
-                <a href="#services" class="btn btn-secondary">了解服务</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 关于我 -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">关于我</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <div class="avatar-placeholder">
-                        <svg viewBox="0 0 100 100" width="150" height="150">
-                            <circle cx="50" cy="50" r="45" fill="#667eea"/>
-                            <text x="50" y="55" text-anchor="middle" fill="white" font-size="30">👨‍💻</text>
-                        </svg>
-                    </div>
-                </div>
-                <div class="about-text">
-                    <h3>热爱电脑技术的实践者</h3>
-                    <p>专注于为客户提供实用、可靠的技术解决方案。熟悉电脑维修、系统重装、远程协助，能完成3D建模、网站开发及小程序制作的基础落地服务。</p>
-                    <p>从业多年，坚持"能做才接、做就做好"的服务理念，选择我，就是选择踏实和放心。</p>
-                    <div class="skills">
-                        <span class="skill-tag">Blender/Maya 资深建模</span>
-                        <span class="skill-tag">HTML/CSS/JS 网站开发</span>
-                        <span class="skill-tag">微信小程序原生开发</span>
-                        <span class="skill-tag">电脑维护与技术支持</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 服务介绍 -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">服务介绍</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🎨</div>
-                    <h3>3D建模</h3>
-                    <p>专业的3D建模服务，包括产品建模、场景建模、角色建模等。使用Blender专业工具，为您打造精美的3D作品。</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💻</div>
-                    <h3>网站搭建</h3>
-                    <p>从企业官网到电商平台，从个人博客到管理系统，提供全方位的网站开发服务。响应式设计，完美适配各种设备。</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📱</div>
-                    <h3>小程序开发</h3>
-                    <p>微信小程序、支付宝小程序开发，提供从设计到上线的一站式服务。功能完善，用户体验优秀。</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔧</div>
-                    <h3>电脑维护</h3>
-                    <p>提供远程技术支持服务，解决您在使用电脑、软件、网络等方面遇到的问题。快速响应，高效解决。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 案例展示 -->
-    <section id="cases" class="cases">
-        <div class="container">
-            <h2 class="section-title">案例展示</h2>
-            <p class="section-subtitle">更多案例持续更新中...</p>
-            
-            <!-- 真实接单案例 -->
-            <div class="case-section">
-                <h3 class="section-subtitle">真实接单案例</h3>
-                <div class="portfolio-grid">
-                    <div class="portfolio-item case-item">
-                        <div class="portfolio-image">
-                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=3D%20modeling%20of%20a%20Lexus%20sports%20car%2C%20photorealistic%20render%2C%20professional%20quality&image_size=square_hd" alt="3D建模 - 雷克萨斯跑车" width="100%" height="200" style="object-fit: cover;" loading="lazy">
-                        </div>
-                        <div class="portfolio-info">
-                            <h4>3D建模 - 雷克萨斯跑车</h4>
-                            <p>电商产品建模</p>
-                            <div class="portfolio-note">客户：某电商平台</div>
-                        </div>
-                    </div>
-                    <div class="portfolio-item case-item">
-                        <div class="portfolio-image">
-                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=modern%20website%20design%20for%20a%20technology%20company%2C%20clean%20interface%2C%20professional%20layout&image_size=square_hd" alt="企业官网开发" width="100%" height="200" style="object-fit: cover;" loading="lazy">
-                        </div>
-                        <div class="portfolio-info">
-                            <h4>企业官网开发</h4>
-                            <p>响应式网站</p>
-                            <div class="portfolio-note">客户：某科技公司</div>
-                        </div>
-                    </div>
-                    <div class="portfolio-item case-item">
-                        <div class="portfolio-image">
-                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=WeChat%20mini%20program%20for%20restaurant%20ordering%2C%20mobile%20interface%2C%20user%20friendly%20design&image_size=square_hd" alt="小程序开发 - 餐饮点单小程序" width="100%" height="200" style="object-fit: cover;" loading="lazy">
-                        </div>
-                        <div class="portfolio-info">
-                            <h4>小程序开发 - 餐饮点单</h4>
-                            <p>微信小程序</p>
-                            <div class="portfolio-note">客户：某餐饮企业</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 技术练习案例 -->
-            <div class="case-section">
-                <h3 class="section-subtitle">技术练习案例</h3>
-                <div class="portfolio-grid">
-                    <div class="portfolio-item">
-                        <div class="portfolio-image">
-                            <img src="https://picsum.photos/800/600?random=1" alt="汽车3D建模练习" width="100%" height="200" style="object-fit: cover;" loading="lazy">
-                        </div>
-                        <div class="portfolio-info">
-                            <h4>汽车 3D 建模练习</h4>
-                            <p>白橙跑车</p>
-                            <div class="portfolio-note">技术演示</div>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <div class="portfolio-image">
-                            <img src="https://picsum.photos/800/600?random=2" alt="汽车渲染练习" width="100%" height="200" style="object-fit: cover;" loading="lazy">
-                        </div>
-                        <div class="portfolio-info">
-                            <h4>汽车渲染与材质表现练习</h4>
-                            <p>黑蓝跑车</p>
-                            <div class="portfolio-note">技术演示</div>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <div class="portfolio-image">
-                            <img src="https://picsum.photos/800/600?random=3" alt="建筑场景建模练习" width="100%" height="200" style="object-fit: cover;" loading="lazy">
-                        </div>
-                        <div class="portfolio-info">
-                            <h4>建筑场景建模练习</h4>
-                            <p>小房子</p>
-                            <div class="portfolio-note">技术演示</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 客户评价 -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <h2 class="section-title">客户评价</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                    </div>
-                    <p class="testimonial-text">3D建模服务非常专业，跑车建模效果超出预期，沟通及时，价格合理。强烈推荐！</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <svg viewBox="0 0 100 100" width="50" height="50">
-                                <circle cx="50" cy="50" r="45" fill="#667eea"/>
-                                <text x="50" y="55" text-anchor="middle" fill="white" font-size="20">张</text>
-                            </svg>
-                        </div>
-                        <div class="author-info">
-                            <h4>张先生</h4>
-                            <p>3D建模客户</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                    </div>
-                    <p class="testimonial-text">网站搭建服务很专业，响应速度快，设计美观，功能完善。非常满意的一次合作。</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <svg viewBox="0 0 100 100" width="50" height="50">
-                                <circle cx="50" cy="50" r="45" fill="#667eea"/>
-                                <text x="50" y="55" text-anchor="middle" fill="white" font-size="20">李</text>
-                            </svg>
-                        </div>
-                        <div class="author-info">
-                            <h4>李女士</h4>
-                            <p>网站开发客户</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                        <span>★</span>
-                    </div>
-                    <p class="testimonial-text">小程序开发服务非常专业，餐饮点单小程序功能完善，用户体验优秀，上线后效果很好。</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <svg viewBox="0 0 100 100" width="50" height="50">
-                                <circle cx="50" cy="50" r="45" fill="#667eea"/>
-                                <text x="50" y="55" text-anchor="middle" fill="white" font-size="20">王</text>
-                            </svg>
-                        </div>
-                        <div class="author-info">
-                            <h4>王先生</h4>
-                            <p>小程序开发客户</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 联系方式 + 免登录表单 -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">联系方式</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">💬</div>
-                        <div class="contact-details">
-                            <h3>微信</h3>
-                            <p>xing-yun-1997</p>
-                            <div class="qrcode">
-                                <img src="https://picsum.photos/120/120?random=4" alt="微信二维码" width="120" height="120" loading="lazy">
-                            </div>
-                            <button class="btn-copy" onclick="copyText('xing-yun-1997')">复制微信号</button>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">🐧</div>
-                        <div class="contact-details">
-                            <h3>QQ</h3>
-                            <p>1985297393</p>
-                            <button class="btn-copy" onclick="copyText('1985297393')">复制QQ号</button>
-                            <!-- 替换为你的真实QQ加好友链接 -->
-                            <a href="https://qm.qq.com/cgi-bin/qm/qr?k=你的QQ_KEY&noverify=0" target="_blank" class="btn-link">一键加好友</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">🐟</div>
-                        <div class="contact-details">
-                            <h3>闲鱼</h3>
-                            <p><a href="https://2.taobao.com/profile/index.htm?userId=Sakitam08" target="_blank" rel="noopener noreferrer">Sakitam08</a></p>
-                            <button class="btn-copy" onclick="copyText('Sakitam08')">复制闲鱼号</button>
-                            <a href="https://2.taobao.com/profile/index.htm?userId=Sakitam08" target="_blank" class="btn-link">访问闲鱼</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 核心修改：免登录的原生表单（替代腾讯文档） -->
-                <div class="contact-form">
-                    <h3>需求提交</h3>
-                    <div class="form-container">
-                        <form id="contactForm" onsubmit="handleSubmit(event)">
-                            <div class="form-group">
-                                <label for="name">您的姓名</label>
-                                <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">联系邮箱</label>
-                                <input type="email" id="email" name="email" required placeholder="请输入您的邮箱">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">联系电话</label>
-                                <input type="tel" id="phone" name="phone" required placeholder="请输入您的联系电话">
-                            </div>
-                            <div class="form-group">
-                                <label for="service">需求类型</label>
-                                <select id="service" name="service" required>
-                                    <option value="">请选择服务类型</option>
-                                    <option value="3dmodeling">3D建模</option>
-                                    <option value="website">网站搭建</option>
-                                    <option value="miniprogram">小程序开发</option>
-                                    <option value="techsupport">电脑维护</option>
-                                    <option value="other">其他</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">项目描述</label>
-                                <textarea id="message" name="message" rows="5" required placeholder="请详细描述您的需求..."></textarea>
-                            </div>
-                            <button type="submit" class="btn-submit">提交需求</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 接单说明 -->
-    <section id="order" class="order">
-        <div class="container">
-            <h2 class="section-title">接单说明</h2>
-            <div class="order-content">
-                <div class="order-section">
-                    <h3>合作流程</h3>
-                    <ol>
-                        <li>需求沟通：详细了解客户需求，确定项目范围</li>
-                        <li>报价：根据需求复杂度提供合理报价</li>
-                        <li>签约：签订服务合同，明确双方权利义务</li>
-                        <li>开发：按照约定时间和要求进行开发</li>
-                        <li>交付：完成项目并交付给客户</li>
-                        <li>售后：提供售后服务和技术支持</li>
-                    </ol>
-                </div>
-                <div class="order-section">
-                    <h3>售后保障</h3>
-                    <ul>
-                        <li>小问题免费修改（7天内）</li>
-                        <li>项目质保周期（30天）</li>
-                        <li>技术支持（工作日24小时内响应）</li>
-                    </ul>
-                </div>
-                <div class="order-section">
-                    <h3>付款方式</h3>
-                    <ul>
-                        <li>微信支付</li>
-                        <li>支付宝</li>
-                        <li>银行转账</li>
-                        <li>闲鱼交易</li>
-                    </ul>
-                </div>
-                <div class="order-section">
-                    <h3>订单管理系统</h3>
-                    <p>个人自动接单系统，仅用于内部订单管理</p>
-                    <a href="https://sakitam08.github.io/auto-order-site/" target="_blank" class="btn btn-primary">访问订单管理系统</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>技术服务</h3>
-                    <p>专业、高效、可靠的技术服务</p>
-                </div>
-                <div class="footer-section">
-                    <h3>快速链接</h3>
-                    <ul>
-                        <li><a href="#home">首页</a></li>
-                        <li><a href="#services">服务项目</a></li>
-                        <li><a href="#cases">技术练习案例</a></li>
-                        <li><a href="#contact">联系方式</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>联系我</h3>
-                    <p>微信：xing-yun-1997</p>
-                    <p>QQ：1985297393</p>
-                    <p>闲鱼：<a href="https://2.taobao.com/profile/index.htm?userId=Sakitam08" target="_blank" rel="noopener noreferrer">Sakitam08</a></p>
-                    <p>公众号：Sakitam08</p>
-                    <p>Gitee：<a href="https://gitee.com/Sakitam08" target="_blank" rel="noopener noreferrer">https://gitee.com/Sakitam08</a></p>
-                    <p>GitHub：<a href="https://github.com/Sakitam08" target="_blank" rel="noopener noreferrer">https://github.com/Sakitam08</a></p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 技术服务平台. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- 回到顶部按钮 -->
-    <button id="backToTop" class="back-to-top" aria-label="回到顶部">
-        ↑
-    </button>
-
-    <!-- 图片预览模态框 -->
-    <div id="imagePreviewModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <img id="previewImage" src="" alt="预览图片">
+    <!-- 对话容器 -->
+    <div class="chat-container">
+        <!-- 左侧对话展示区 -->
+        <div class="chat-content" id="chatContent">
+            <!-- 对话内容由JS动态生成 -->
         </div>
     </div>
 
-    <!-- 核心脚本：复制功能 + 表单提交 + 基础交互 -->
+    <!-- 右下角固定图标（分离独立） -->
+    <div class="icon-fixed" id="chatIcon">
+        <svg viewBox="0 0 24 24">
+            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+        </svg>
+    </div>
+
     <script>
-        // 1. 复制文本功能（微信/QQ/闲鱼号）
-        function copyText(text) {
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(text).then(() => {
-                    alert('复制成功！');
-                }).catch(err => {
-                    alert('复制失败，请手动复制：' + text);
-                });
-            } else {
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                alert('复制成功！');
-            }
+        // 配置：需要逐个显示的对话文本
+        const chatText = "右下角的这个图标要分开带一个词一个词对话一个字向上可以把对话放在左边往上指定是放在右下角这样分开会好一点";
+        // 拆分方式：按「字」拆分（如需按「词」拆分，可改成按空格/标点拆分）
+        const words = chatText.split(''); 
+        
+        // 对话容器
+        const chatContent = document.getElementById('chatContent');
+        // 右下角图标
+        const chatIcon = document.getElementById('chatIcon');
+
+        // 单字/单词向上滚动显示函数
+        function showWordByWord() {
+            // 清空原有内容
+            chatContent.innerHTML = '';
+            
+            // 创建对话气泡
+            const bubble = document.createElement('div');
+            bubble.className = 'chat-bubble';
+            const wordScroll = document.createElement('div');
+            wordScroll.className = 'word-scroll';
+            bubble.appendChild(wordScroll);
+            chatContent.appendChild(bubble);
+
+            // 逐个添加字/词，带延迟（模拟向上滚动效果）
+            let index = 0;
+            const timer = setInterval(() => {
+                if (index >= words.length) {
+                    clearInterval(timer);
+                    return;
+                }
+                // 添加当前字/词
+                wordScroll.innerHTML += words[index];
+                // 滚动到最新内容
+                chatContent.scrollTop = chatContent.scrollHeight;
+                index++;
+            }, 100); // 每个字/词的显示间隔（可调整）
         }
 
-        // 2. 表单提交处理（免登录，提交后提示 + 可扩展到微信/邮箱）
-        function handleSubmit(event) {
-            event.preventDefault(); // 阻止默认提交
-            
-            // 1. 获取表单数据
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                service: document.getElementById('service').value,
-                message: document.getElementById('message').value
-            };
-            
-            // 2. 提示用户提交成功
-            alert(`您好${formData.name}，您的${formData.service}需求已提交！我会在1个工作日内通过${formData.phone}/${formData.email}联系您。`);
-            
-            // 3. 清空表单
-            document.getElementById('contactForm').reset();
+        // 初始加载时显示对话
+        window.onload = showWordByWord;
 
-            // 【可选扩展】如果想收到提交消息，可对接：
-            // - 微信公众号推送（通过微信开放平台）
-            // - 邮箱接收（通过网易/QQ邮箱SMTP）
-            // - 飞书/钉钉机器人推送
-        }
-
-        // 3. 回到顶部功能
-        const backToTop = document.getElementById('backToTop');
-        window.onscroll = () => {
-            backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-        };
-        backToTop.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
-
-        // 4. 汉堡菜单（手机端导航）
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        hamburger.onclick = () => {
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-            navMenu.style.flexDirection = 'column';
-            navMenu.style.position = 'absolute';
-            navMenu.style.top = '60px';
-            navMenu.style.left = '0';
-            navMenu.style.width = '100%';
-            navMenu.style.background = '#fff';
-            navMenu.style.padding = '20px';
-            navMenu.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
-        };
-
-        // 5. 图片预览功能
-        const modal = document.getElementById('imagePreviewModal');
-        const previewImg = document.getElementById('previewImage');
-        const closeBtn = document.querySelector('.close-modal');
-        const portfolioImgs = document.querySelectorAll('.portfolio-image img');
-
-        portfolioImgs.forEach(img => {
-            img.onclick = () => {
-                modal.style.display = 'block';
-                previewImg.src = img.src;
-                previewImg.alt = img.alt;
-            };
+        // 点击右下角图标：重新触发单字滚动显示
+        chatIcon.addEventListener('click', () => {
+            showWordByWord();
+            // 可选：点击图标时滚动到对话区
+            chatContent.scrollIntoView({ behavior: 'smooth' });
         });
-        closeBtn.onclick = () => modal.style.display = 'none';
-        window.onclick = (e) => e.target === modal && (modal.style.display = 'none');
     </script>
 </body>
 </html>
